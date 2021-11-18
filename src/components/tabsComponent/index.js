@@ -1,5 +1,6 @@
 import { Tab, Tabs } from 'react-bootstrap';
 import HomeComponent from '../HomeComponent';
+import PessoasComponent from '../PessoasComponent';
 
 const TabsComponent = () => {
     return (
@@ -8,7 +9,7 @@ const TabsComponent = () => {
                 <HomeComponent />
             </Tab>
             <Tab eventKey="pessoas" title="Pessoas">
-                <p>TODO!</p>
+                <PessoasComponent />
             </Tab>
             <Tab eventKey="despesas" title="Despesas">
                 <p>TODO!</p>
