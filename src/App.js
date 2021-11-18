@@ -1,9 +1,9 @@
-import tabsComponent from "./components/tabsComponent";
+import TabsComponent from "./components/TabsComponent";
 
 const App = () => {
   return(
   <div>
-    <tabsComponent />
+    <TabsComponent />
   </div>
   )
   

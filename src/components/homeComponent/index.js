@@ -1,4 +1,4 @@
-const homeComponent = () => {
+const HomeComponent = () => {
     return(
     <div>
         <h1>Olá! :)</h1>
@@ -6,3 +6,5 @@ const homeComponent = () => {
     </div>
     )
 }
+
+export default HomeComponent;
