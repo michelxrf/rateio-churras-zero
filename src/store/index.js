@@ -3,15 +3,16 @@ import { createStore } from "redux";
 
 const INITIAL_STATE = {
     pessoas: [
-        'nome1','nome2'
+        {id: 0, nome: "alan"},
+        {id: 1, nome: "beta"},
+        {id: 2, nome: "claudio"},
     ]
 }
 
 function pessoasRedux(state = INITIAL_STATE, action){
-    let novoId = state.pessoas.length
     switch(action.type){
         case 'ADD_PESSOA':
-            return { ...state, pessoas: [state.pessoas, action.nome]}
+            return { ...state, pessoas: [...state.pessoas, {id: state.pessoas.length, nome: action.nome}]}
         default:
             return state
     }
