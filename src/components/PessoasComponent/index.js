@@ -1,8 +1,8 @@
-import { Table, Form, Button, FormControl} from "react-bootstrap"
+import { Table, Form, Button, FormControl, InputGroup} from "react-bootstrap"
 import { useState } from "react"
 
 const PessoasComponent = () => {
-    const [pessoas, setPessoas] = useState([{id:0,nome:"alan"}])
+    const [pessoas, setPessoas] = useState([])
 
     const inserirPessoa = () => {
         let novoNome = document.getElementById("formNome").value
@@ -11,11 +11,11 @@ const PessoasComponent = () => {
     }
 
     return(
-        <div>
-            <Form>
-                <FormControl id="formNome" type="text" placeholder="Insira o nome" />
+        <>
+            <InputGroup>
+                <FormControl id="formNome" type="text" placeholder="Insira o nome" autoComplete='off' action={inserirPessoa} />
                 <Button variant="primary" onClick={inserirPessoa} >Inserir</Button>
-            </Form>
+            </InputGroup>
 
             <Table>
                 <thead>
@@ -25,15 +25,15 @@ const PessoasComponent = () => {
                     </tr>
                 </thead>
                 <tbody>
-                        {pessoas.map(people => (
-                            <tr key={people.id}>
-                                <td>{people.id}</td>
-                                <td>{people.nome}</td>
+                        {pessoas.map(pessoa => (
+                            <tr key={pessoa.id}>
+                                <td>{pessoa.id}</td>
+                                <td>{pessoa.nome}</td>
                             </tr>
                         ))}
                 </tbody>
             </Table>
-        </div>
+        </>
     )
 }
 
