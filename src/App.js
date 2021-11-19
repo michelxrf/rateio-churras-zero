@@ -2,10 +2,12 @@ import { Tab, Tabs } from 'react-bootstrap';
 import HomeComponent from './components/HomeComponent';
 import PessoasComponent from './components/PessoasComponent';
 import DespesasComponent from './components/DespesasComponent';
+import { Provider } from 'react-redux';
+import store from './store';
 
 const App = () => {
   return(
-  <>
+  <Provider store={store}>
     <Tabs defaultActiveKey="home" id="uncontrolled-tab-example" className="mb-3">
       <Tab eventKey="home" title="Home">
           <HomeComponent />
@@ -23,7 +25,7 @@ const App = () => {
           <p>TODO!</p>
       </Tab>
     </Tabs>
-  </>
+  </Provider>
   )
   
 }
