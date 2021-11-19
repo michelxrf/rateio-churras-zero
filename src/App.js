@@ -1,3 +1,4 @@
+import React from 'react';
 import { Tab, Tabs } from 'react-bootstrap';
 import HomeComponent from './components/HomeComponent';
 import PessoasComponent from './components/PessoasComponent';

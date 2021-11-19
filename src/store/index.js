@@ -2,18 +2,20 @@
 import { createStore } from "redux";
 
 const INITIAL_STATE = {
-    pessoas:[],
-    despesas:[],
-    restituicoes:[]
+    pessoas: [
+        'nome1','nome2'
+    ]
 }
 
-function algumNome(state, action){
+function pessoasRedux(state = INITIAL_STATE, action){
+    let novoId = state.pessoas.length
     switch(action.type){
         case 'ADD_PESSOA':
-            return { ...state, pessoas: [state.pessoas, action.id, action.nome]}
+            return { ...state, pessoas: [state.pessoas, action.nome]}
+        default:
+            return state
     }
 }
 
-const store = createStore()
-
+const store = createStore(pessoasRedux)
 export default store;

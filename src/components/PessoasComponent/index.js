@@ -1,19 +1,20 @@
-import { Table, Form, Button, FormControl, InputGroup} from "react-bootstrap"
-import { useState } from "react"
+import React from 'react'
+import { Table, Button, FormControl, InputGroup} from "react-bootstrap"
+import { useSelector, useDispatch } from 'react-redux'
 
 const PessoasComponent = () => {
-    const [pessoas, setPessoas] = useState([])
+    const pessoas = useSelector(state => state.pessoas)
+    const dispatch = useDispatch()
 
-    const inserirPessoa = () => {
-        let novoNome = document.getElementById("formNome").value
-        if(novoNome)
-            setPessoas(pessoas.concat({id:pessoas.length, nome:novoNome}))
+    function inserirPessoa(){
+        console.log({type: 'ADD_PESSOA', nome: document.getElementById("formNome").value})
+        dispatch({type: 'ADD_PESSOA', nome: document.getElementById("formNome").value})
     }
 
     return(
         <>
             <InputGroup>
-                <FormControl id="formNome" type="text" placeholder="Insira o nome" autoComplete='off' action={inserirPessoa} />
+                <FormControl id="formNome" type="text" placeholder="Insira o nome" autoComplete='off' />
                 <Button variant="primary" onClick={inserirPessoa} >Inserir</Button>
             </InputGroup>
 
