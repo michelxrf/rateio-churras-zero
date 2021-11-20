@@ -3,6 +3,7 @@ import { Tab, Tabs } from 'react-bootstrap';
 import HomeComponent from './components/HomeComponent';
 import PessoasComponent from './components/PessoasComponent';
 import DespesasComponent from './components/DespesasComponent';
+import PagamentosComponent from './components/PagamentosComponent';
 import { Provider } from 'react-redux';
 import store from './store';
 
@@ -19,8 +20,8 @@ const App = () => {
       <Tab eventKey="despesas" title="Despesas">
           <DespesasComponent />
       </Tab>
-      <Tab eventKey="ressarcimentos" title="Ressarcimentos">
-          <p>TODO!</p>
+      <Tab eventKey="pagamentos" title="Pagamentos">
+          <PagamentosComponent />
       </Tab>
       <Tab eventKey="totais" title="Totais">
           <p>TODO!</p>

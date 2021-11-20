@@ -1,4 +1,3 @@
-import React from 'react'
 import { Table, Button, FormControl, InputGroup} from "react-bootstrap"
 import { useSelector, useDispatch } from 'react-redux'
 
@@ -8,6 +7,8 @@ const PessoasComponent = () => {
 
     function inserirPessoa(){
         const novaPessoa = document.getElementById("formNome").value
+        
+        document.getElementById("formNome").value = null
 
         if(novaPessoa)
             dispatch({type: 'ADD_PESSOA', nome: novaPessoa})

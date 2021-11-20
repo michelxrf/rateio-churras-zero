@@ -11,18 +11,19 @@ const DespesasComponent = () => {
         const novaDespesaNomeId = document.getElementById("dropdownDespesa").value
 
         document.getElementById("formDespesa").value = null
-        document.getElementById("dropdownDespesa").value = null       
+        document.getElementById("dropdownDespesa").selectedIndex = 0  
 
-        if(novaDespesaValor && novaDespesaNomeId)
-            dispatch({type: "ADD_DESPESA", valor: novaDespesaValor, pessoaId: novaDespesaNomeId})       
+        if((typeof(novaDespesaNomeId) === 'number') && novaDespesaValor){
+            dispatch({type: "ADD_DESPESA", valor: novaDespesaValor, pessoaId: novaDespesaNomeId})
+        }       
     }   
 
     return(
         <>
             <InputGroup>
                 <FormControl id="formDespesa" type="number" placeholder="Valor pago" min="0.01" step="0.01" ></FormControl>
-                <FormSelect id="dropdownDespesa">
-                    <option value="null">Quem pagou?</option>
+                <FormSelect id="dropdownDespesa" placeholder="quem pagou" >
+                    <option>Quem pagou?</option>
                     {pessoas.map(pessoa => (<option key={pessoa.id} value={pessoa.id}>{pessoa.nome}</option>))}
                 </FormSelect>
 
