@@ -1,20 +1,52 @@
-import { useState } from "react"
-import { FormControl, Button, Table, InputGroup, Dropdown, FormSelect } from "react-bootstrap"
+import { FormControl, Button, Table, InputGroup, FormSelect } from "react-bootstrap"
+import { useSelector, useDispatch } from "react-redux"
 
 const DespesasComponent = () => {
-    const [despesas, setDespesas] = useState([])
-    const [pessoas, setPessoas] = useState([])//mock, remover quando implementar store
-    
-    return(
-        <InputGroup>
-            <FormControl id="formDespesa" type="number" placeholder="Valor pago" min="0.01" step="0.01" ></FormControl>
-            <FormSelect>
-                <option value="null">Quem pagou?</option>
-                {pessoas.map(pessoa => (<option key={pessoa.id} value={pessoa.id}>{pessoa.name}</option>))}
-            </FormSelect>
+    const despesas = useSelector(state => state.despesas)
+    const pessoas = useSelector(state => state.pessoas)
+    const dispatch = useDispatch()
 
-            <Button variant="primary" >Inserir</Button>
-        </InputGroup>
+    function inserirDespesa(){
+        const novaDespesaValor = document.getElementById("formDespesa").value
+        const novaDespesaNomeId = document.getElementById("dropdownDespesa").value
+
+        document.getElementById("formDespesa").value = null
+        document.getElementById("dropdownDespesa").value = null       
+
+        if(novaDespesaValor && novaDespesaNomeId)
+            dispatch({type: "ADD_DESPESA", valor: novaDespesaValor, pessoaId: novaDespesaNomeId})       
+    }   
+
+    return(
+        <>
+            <InputGroup>
+                <FormControl id="formDespesa" type="number" placeholder="Valor pago" min="0.01" step="0.01" ></FormControl>
+                <FormSelect id="dropdownDespesa">
+                    <option value="null">Quem pagou?</option>
+                    {pessoas.map(pessoa => (<option key={pessoa.id} value={pessoa.id}>{pessoa.nome}</option>))}
+                </FormSelect>
+
+                <Button variant="primary" onClick={inserirDespesa} >Inserir</Button>
+            </InputGroup>
+            <Table>
+            <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Valor</th>
+                        <th>Nome</th>
+                    </tr>
+                </thead>
+                <tbody>
+                        {despesas.map(despesa => (
+                            <tr key={despesa.id}>
+                                <td>{despesa.id}</td>
+                                <td>{despesa.valor}</td>
+                                <td>{pessoas[despesa.pessoaId].nome}</td>
+                            </tr>
+                        ))}
+                </tbody>
+            </Table>
+        </>
     )
 }
 

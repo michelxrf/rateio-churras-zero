@@ -7,8 +7,10 @@ const PessoasComponent = () => {
     const dispatch = useDispatch()
 
     function inserirPessoa(){
-        console.log({type: 'ADD_PESSOA', nome: document.getElementById("formNome").value})
-        dispatch({type: 'ADD_PESSOA', nome: document.getElementById("formNome").value})
+        const novaPessoa = document.getElementById("formNome").value
+
+        if(novaPessoa)
+            dispatch({type: 'ADD_PESSOA', nome: novaPessoa})
     }
 
     return(
