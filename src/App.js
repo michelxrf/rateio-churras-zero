@@ -1,18 +1,17 @@
-import { Tab, Tabs } from 'react-bootstrap';
-import HomeComponent from './components/HomeComponent';
-import PessoasComponent from './components/PessoasComponent';
-import DespesasComponent from './components/DespesasComponent';
-import PagamentosComponent from './components/PagamentosComponent';
-import TotaisComponent from './components/TotaisComponent';
-import { Provider } from 'react-redux';
-import store from './store';
+import { Tab, Tabs } from 'react-bootstrap'
+import PessoasComponent from './components/PessoasComponent'
+import DespesasComponent from './components/DespesasComponent'
+import PagamentosComponent from './components/PagamentosComponent'
+import TotaisComponent from './components/TotaisComponent'
+import { Provider } from 'react-redux'
+import store from './store'
 
 const App = () => {
   return(
   <Provider store={store}>
-    <Tabs defaultActiveKey="home" id="uncontrolled-tab-example" className="mb-3">
-      <Tab eventKey="home" title="Home">
-          <HomeComponent />
+    <Tabs defaultActiveKey="totais" id="uncontrolled-tab-example" className="mb-3">
+      <Tab eventKey="totais" title="Totais">
+          <TotaisComponent />
       </Tab>
       <Tab eventKey="pessoas" title="Pessoas">
           <PessoasComponent />
@@ -22,9 +21,6 @@ const App = () => {
       </Tab>
       <Tab eventKey="pagamentos" title="Pagamentos">
           <PagamentosComponent />
-      </Tab>
-      <Tab eventKey="totais" title="Totais">
-          <TotaisComponent />
       </Tab>
     </Tabs>
   </Provider>

@@ -1,5 +1,5 @@
 import { composeWithDevTools } from 'redux-devtools-extension'
-import { createStore } from "redux";
+import { createStore } from "redux"
 
 const INITIAL_STATE = {
     pessoas: [],
@@ -31,4 +31,4 @@ function storeRedux(state = INITIAL_STATE, action){
 }
 
 const store = createStore(storeRedux, composeWithDevTools())
-export default store;
+export default store

@@ -1,6 +1,6 @@
-import { useSelector, useDispatch } from "react-redux";
-import { Table, Alert } from "react-bootstrap";
-import { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux"
+import { Table, Alert } from "react-bootstrap"
+import { useEffect } from "react"
 
 const TotaisComponent = () => {
     const pessoas = useSelector(state => state.pessoas)
@@ -16,7 +16,6 @@ const TotaisComponent = () => {
         let despesaTotalPorPessoa = 0
         if(despesas.length > 0)
             despesaTotalPorPessoa = (despesas.reduce((sum, element) => sum + element.valor, 0)/pessoas.length)
-        console.log("Despesa por pessoa: " + despesaTotalPorPessoa)
 
         let novoTotais = []
 
@@ -36,33 +35,22 @@ const TotaisComponent = () => {
             let pagamentosFiltrados = pagamentos.filter(({paganteId}) => paganteId === pessoa.id)
             if(pagamentosFiltrados.length > 0)
                 pagamentosFeitosDeste = pagamentosFiltrados.reduce((sum, element) => sum + element.valor, 0)
-            
-            console.log(pagamentosFiltrados)
 
             pagamentosFiltrados = pagamentos.filter(({pagoId}) => pagoId === pessoa.id)
             if(pagamentosFiltrados.length > 0)    
                 pagamentosFeitosAEste = pagamentosFiltrados.reduce((sum, element) => sum + element.valor, 0)
-    
-            console.log(pagamentosFiltrados)
 
             //calcula os pagamentos devidos
-            console.log("despesaDeste " + despesaTotalDeste)
-            console.log("despesa/pessoa " + despesaTotalPorPessoa)
-            console.log("pagamentos pagos " + pagamentosFeitosDeste)
-            console.log("apagamentos recebidos " + pagamentosFeitosAEste)
-
             let esteDeveReceber = despesaTotalDeste - despesaTotalPorPessoa + pagamentosFeitosDeste - pagamentosFeitosAEste
             let esteDevePagar = 0
 
             if(esteDeveReceber < 0){
                 esteDevePagar = -esteDeveReceber
                 esteDeveReceber = 0
-                console.log(esteDevePagar)
             }
 
             novoTotais.push({ id: pessoa.id, nome: pessoas[pessoa.id].nome, despesa: despesaTotalDeste, deveReceber: esteDeveReceber, devePagar: esteDevePagar})
         }
-        console.log("Dispatch.")
         dispatch({type:"ADD_TOTAIS", novoTotal: novoTotais, despesaPorPessoa: despesaTotalPorPessoa})
     }
     
@@ -70,9 +58,8 @@ const TotaisComponent = () => {
 
     return (
         <>
-            <Alert variant='secondary'>
-                <h2>Aqui vai dizer se está tudo quitado ou não.</h2>
-                <p>Despesa por pessoa: {despesaPorPessoa.toFixed(2)}</p>
+            <Alert variant='light'>
+                <h2>Despesa por pessoa: {despesaPorPessoa.toFixed(2)}</h2>
             </Alert>
             <Table>
                 <thead>
