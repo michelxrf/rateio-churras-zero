@@ -7,7 +7,7 @@ const TotaisComponent = () => {
     const despesas = useSelector(state => state.despesas)
     const pagamentos = useSelector(state => state.pagamentos)
     const totais = useSelector(state => state.totais)
-    const porPessoa = useSelector(state => state.despesaPorPessoa)
+    const despesaPorPessoa = useSelector(state => state.despesaPorPessoa)
 
     const dispatch = useDispatch()
     
@@ -15,9 +15,8 @@ const TotaisComponent = () => {
         
         let despesaTotalPorPessoa = 0
         if(despesas.length > 0)
-            despesaTotalPorPessoa = (despesas.reduce((sum, element) => sum + element.valor,0)/pessoas.length)
+            despesaTotalPorPessoa = (despesas.reduce((sum, element) => sum + element.valor, 0)/pessoas.length)
         console.log("Despesa por pessoa: " + despesaTotalPorPessoa)
-        console.log("despesas.length: " + despesas.length)
 
         let novoTotais = []
 
@@ -26,8 +25,9 @@ const TotaisComponent = () => {
             //soma as despesas desta pessoa
             let despesaTotalDeste = 0
             let despesasFiltradas = despesas.filter(({pessoaId}) => pessoaId === pessoa.id)
+            
             if(despesasFiltradas.length > 0)
-                despesaTotalDeste = despesasFiltradas.reduce((sum, element) => sum + element.valor)
+                despesaTotalDeste = despesasFiltradas.reduce((sum, element) => sum + element.valor, 0)
     
             //Pagamentos feitos por esta pessoa
             let pagamentosFeitosDeste = 0
@@ -35,31 +35,34 @@ const TotaisComponent = () => {
             
             let pagamentosFiltrados = pagamentos.filter(({paganteId}) => paganteId === pessoa.id)
             if(pagamentosFiltrados.length > 0)
-                pagamentosFeitosDeste = pagamentosFiltrados.reduce((sum, element) => sum + element.valor)
+                pagamentosFeitosDeste = pagamentosFiltrados.reduce((sum, element) => sum + element.valor, 0)
             
+            console.log(pagamentosFiltrados)
+
             pagamentosFiltrados = pagamentos.filter(({pagoId}) => pagoId === pessoa.id)
-            if(pagamentosFiltrados > 0)    
-                pagamentosFeitosAEste = pagamentosFiltrados.reduce((sum, element) => sum + element.valor)
+            if(pagamentosFiltrados.length > 0)    
+                pagamentosFeitosAEste = pagamentosFiltrados.reduce((sum, element) => sum + element.valor, 0)
     
+            console.log(pagamentosFiltrados)
+
             //calcula os pagamentos devidos
-            let esteDeveReceber = 0
+            console.log("despesaDeste " + despesaTotalDeste)
+            console.log("despesa/pessoa " + despesaTotalPorPessoa)
+            console.log("pagamentos pagos " + pagamentosFeitosDeste)
+            console.log("apagamentos recebidos " + pagamentosFeitosAEste)
+
+            let esteDeveReceber = despesaTotalDeste - despesaTotalPorPessoa + pagamentosFeitosDeste - pagamentosFeitosAEste
             let esteDevePagar = 0
-            
-            if(despesaTotalDeste + pagamentosFeitosDeste > despesaTotalPorPessoa - pagamentosFeitosAEste){
-                esteDeveReceber = despesaTotalDeste - despesaTotalPorPessoa + pagamentosFeitosDeste - pagamentosFeitosAEste
-                console.log("if")
+
+            if(esteDeveReceber < 0){
+                esteDevePagar = -esteDeveReceber
+                esteDeveReceber = 0
+                console.log(esteDevePagar)
             }
 
-            else if(despesaTotalPorPessoa + pagamentosFeitosAEste > despesaTotalDeste - pagamentosFeitosDeste){
-                esteDevePagar = despesaTotalPorPessoa - despesaTotalDeste - pagamentosFeitosDeste + pagamentosFeitosAEste
-                console.log("else")
-            }
-            console.log(esteDevePagar)
-            console.log(esteDeveReceber)
-            //monta o state totais, falta o dispatch no final
-            
             novoTotais.push({ id: pessoa.id, nome: pessoas[pessoa.id].nome, despesa: despesaTotalDeste, deveReceber: esteDeveReceber, devePagar: esteDevePagar})
         }
+        console.log("Dispatch.")
         dispatch({type:"ADD_TOTAIS", novoTotal: novoTotais, despesaPorPessoa: despesaTotalPorPessoa})
     }
     
@@ -69,7 +72,7 @@ const TotaisComponent = () => {
         <>
             <Alert variant='secondary'>
                 <h2>Aqui vai dizer se está tudo quitado ou não.</h2>
-                <p>Despesa por pessoa: {porPessoa.toFixed(2)}</p>
+                <p>Despesa por pessoa: {despesaPorPessoa.toFixed(2)}</p>
             </Alert>
             <Table>
                 <thead>

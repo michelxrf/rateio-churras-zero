@@ -7,15 +7,15 @@ const PagamentosComponent = () => {
     const dispatch = useDispatch()
 
     function inserirPagamento(){
-        const novoPagamentoValor = document.getElementById("formPagamento").value
-        const novoPagamentoPagante = document.getElementById("dropdownPagador").value
-        const novoPagamentoPago = document.getElementById("dropdownPago").value
+        const novoPagamentoValor = Number(document.getElementById("formPagamento").value)
+        const novoPagamentoPagante = Number(document.getElementById("dropdownPagador").value)
+        const novoPagamentoPago = Number(document.getElementById("dropdownPago").value)
 
         document.getElementById("formPagamento").value = null
         document.getElementById("dropdownPagador").selectedIndex = 0
         document.getElementById("dropdownPago").selectedIndex = 0
 
-        if((novoPagamentoValor) && (novoPagamentoPagante !== "null") && (novoPagamentoPago !== "null") && (novoPagamentoPago !== novoPagamentoPagante))
+        if((novoPagamentoValor) && (novoPagamentoPagante >= 0) && (novoPagamentoPago >= 0) && (novoPagamentoPago !== novoPagamentoPagante))
             dispatch({type: "ADD_PAGAMENTO", valor: novoPagamentoValor, paganteId: novoPagamentoPagante, pagoId: novoPagamentoPago})
     }
 

@@ -7,16 +7,14 @@ const DespesasComponent = () => {
     const dispatch = useDispatch()
 
     function inserirDespesa(){
-        const novaDespesaValor = document.getElementById("formDespesa").value
-        const novaDespesaNomeId = document.getElementById("dropdownDespesa").value
+        const novaDespesaValor = Number(document.getElementById("formDespesa").value)
+        const novaDespesaNomeId = Number(document.getElementById("dropdownDespesa").value)
 
         document.getElementById("formDespesa").value = null
         document.getElementById("dropdownDespesa").selectedIndex = 0
 
-        if(novaDespesaNomeId !== 'null' && novaDespesaValor){
-            console.log("dispatch: " + {type: "ADD_DESPESA", valor: novaDespesaValor, pessoaId: novaDespesaNomeId})
+        if((novaDespesaNomeId >= 0) && novaDespesaValor)
             dispatch({type: "ADD_DESPESA", valor: novaDespesaValor, pessoaId: novaDespesaNomeId})
-        }       
     }   
 
     return(

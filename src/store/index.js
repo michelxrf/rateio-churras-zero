@@ -23,7 +23,7 @@ function storeRedux(state = INITIAL_STATE, action){
             return { ...state, pagamentos: [...state.pagamentos, {id: state.pagamentos.length, valor: action.valor, paganteId: action.paganteId, pagoId: action.pagoId}]}
 
         case 'ADD_TOTAIS':
-            return { ...state, totalPorPessoa: action.totalPorPessoa, totais: action.novoTotal}
+            return { ...state, despesaPorPessoa: action.despesaPorPessoa, totais: action.novoTotal}
 
         default:
             return state
