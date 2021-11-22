@@ -4,8 +4,12 @@ import { createStore } from "redux";
 const INITIAL_STATE = {
     pessoas: [],
     despesas: [],
-    pagamentos: []
+    pagamentos: [],
+    totais: [],
+    despesaPorPessoa: 0.00
 }
+
+
 
 function storeRedux(state = INITIAL_STATE, action){  
     switch(action.type){
@@ -17,6 +21,9 @@ function storeRedux(state = INITIAL_STATE, action){
         
         case 'ADD_PAGAMENTO':
             return { ...state, pagamentos: [...state.pagamentos, {id: state.pagamentos.length, valor: action.valor, paganteId: action.paganteId, pagoId: action.pagoId}]}
+
+        case 'ADD_TOTAIS':
+            return { ...state, totalPorPessoa: action.totalPorPessoa, totais: action.novoTotal}
 
         default:
             return state

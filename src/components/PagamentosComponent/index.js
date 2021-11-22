@@ -38,16 +38,14 @@ const PagamentosComponent = () => {
             <Table>
                 <thead>
                     <tr>
-                        <th>Id</th>
                         <th>Valor</th>
-                        <th>Pagou</th>
-                        <th>Foi pago</th>
+                        <th>Quem pagou</th>
+                        <th>Pagou para</th>
                     </tr>
                 </thead>
                 <tbody>
                     {pagamentos.map(pagamento => (
-                        <tr>
-                            <td>{pagamento.id}</td>
+                        <tr key={pagamento.id} >
                             <td>{pagamento.valor}</td>
                             <td>{pessoas[pagamento.paganteId].nome}</td>
                             <td>{pessoas[pagamento.pagoId].nome}</td>

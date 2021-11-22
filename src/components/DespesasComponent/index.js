@@ -33,7 +33,6 @@ const DespesasComponent = () => {
             <Table>
             <thead>
                     <tr>
-                        <th>Id</th>
                         <th>Valor</th>
                         <th>Nome</th>
                     </tr>
@@ -41,7 +40,6 @@ const DespesasComponent = () => {
                 <tbody>
                         {despesas.map(despesa => (
                             <tr key={despesa.id}>
-                                <td>{despesa.id}</td>
                                 <td>{despesa.valor}</td>
                                 <td>{pessoas[despesa.pessoaId].nome}</td>
                             </tr>

@@ -24,14 +24,12 @@ const PessoasComponent = () => {
             <Table>
                 <thead>
                     <tr>
-                        <th>Id</th>
                         <th>Nome</th>
                     </tr>
                 </thead>
                 <tbody>
                         {pessoas.map(pessoa => (
                             <tr key={pessoa.id}>
-                                <td>{pessoa.id}</td>
                                 <td>{pessoa.nome}</td>
                             </tr>
                         ))}

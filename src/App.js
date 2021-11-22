@@ -3,6 +3,7 @@ import HomeComponent from './components/HomeComponent';
 import PessoasComponent from './components/PessoasComponent';
 import DespesasComponent from './components/DespesasComponent';
 import PagamentosComponent from './components/PagamentosComponent';
+import TotaisComponent from './components/TotaisComponent';
 import { Provider } from 'react-redux';
 import store from './store';
 
@@ -23,7 +24,7 @@ const App = () => {
           <PagamentosComponent />
       </Tab>
       <Tab eventKey="totais" title="Totais">
-          <p>TODO!</p>
+          <TotaisComponent />
       </Tab>
     </Tabs>
   </Provider>
