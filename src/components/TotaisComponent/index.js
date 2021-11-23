@@ -10,21 +10,25 @@ const TotaisComponent = () => {
     const totais = useSelector(state => state.totais)
     const despesaPorPessoa = useSelector(state => state.despesaPorPessoa)
 
+    const pessoasNaoExcluidos = pessoas.filter(({excluido}) => excluido === false)
+    const despesasNaoExcluidos = despesas.filter(({excluido}) => excluido === false)
+    const pagamentosNaoExcluidos = pagamentos.filter(({excluido}) => excluido === false)
+
     const dispatch = useDispatch()
     
     function consolidarTotais(){
         
         let despesaTotalPorPessoa = 0
-        if(despesas.length > 0)
-            despesaTotalPorPessoa = (despesas.reduce((sum, element) => sum + element.valor, 0)/pessoas.length)
+        if(despesasNaoExcluidos.length > 0)
+            despesaTotalPorPessoa = (despesasNaoExcluidos.reduce((sum, element) => sum + element.valor, 0)/pessoasNaoExcluidos.length)
 
         let novoTotais = []
 
-        for(let pessoa of pessoas){
+        for(let pessoa of pessoasNaoExcluidos){
             
             //soma as despesas desta pessoa
             let despesaTotalDeste = 0
-            let despesasFiltradas = despesas.filter(({pessoaId}) => pessoaId === pessoa.id)
+            let despesasFiltradas = despesasNaoExcluidos.filter(({pessoaId}) => pessoaId === pessoa.id)
             
             if(despesasFiltradas.length > 0)
                 despesaTotalDeste = despesasFiltradas.reduce((sum, element) => sum + element.valor, 0)
@@ -33,11 +37,11 @@ const TotaisComponent = () => {
             let pagamentosFeitosDeste = 0
             let pagamentosFeitosAEste = 0
             
-            let pagamentosFiltrados = pagamentos.filter(({paganteId}) => paganteId === pessoa.id)
+            let pagamentosFiltrados = pagamentosNaoExcluidos.filter(({paganteId}) => paganteId === pessoa.id)
             if(pagamentosFiltrados.length > 0)
                 pagamentosFeitosDeste = pagamentosFiltrados.reduce((sum, element) => sum + element.valor, 0)
 
-            pagamentosFiltrados = pagamentos.filter(({pagoId}) => pagoId === pessoa.id)
+            pagamentosFiltrados = pagamentosNaoExcluidos.filter(({pagoId}) => pagoId === pessoa.id)
             if(pagamentosFiltrados.length > 0)    
                 pagamentosFeitosAEste = pagamentosFiltrados.reduce((sum, element) => sum + element.valor, 0)
 
@@ -55,6 +59,7 @@ const TotaisComponent = () => {
         dispatch({type:"ADD_TOTAIS", novoTotal: novoTotais, despesaPorPessoa: despesaTotalPorPessoa})
     }
     
+    // eslint-disable-next-line
     useEffect(consolidarTotais,[pessoas, despesas, pagamentos, dispatch])
 
     return (
@@ -74,7 +79,7 @@ const TotaisComponent = () => {
                 <tbody>
                     {totais.map(total => (
                         <tr key={total.id}>
-                            <td>{pessoas[total.id].nome}</td>
+                            <td>{pessoasNaoExcluidos[total.id].nome}</td>
                             <td>{formatador.format(total.despesa)}</td>
                             <td>{formatador.format(total.deveReceber)}</td>
                             <td>{formatador.format(total.devePagar)}</td>

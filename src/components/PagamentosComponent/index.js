@@ -8,6 +8,9 @@ const PagamentosComponent = () => {
     const pagamentos = useSelector(state => state.pagamentos)
     const dispatch = useDispatch()
 
+    const pessoasNaoExcluidos = pessoas.filter(({excluido}) => excluido === false)
+    const pagamentosNaoExcluidos = pagamentos.filter(({excluido}) => excluido === false)
+
     function inserirPagamento(){
         const novoPagamentoValor = Number(document.getElementById("formPagamento").value)
         const novoPagamentoPagante = Number(document.getElementById("dropdownPagador").value)
@@ -27,11 +30,11 @@ const PagamentosComponent = () => {
                 <FormControl id="formPagamento" type="number" placeholder="Valor" step="0.01" min="0.01" ></FormControl>
                 <FormSelect  id="dropdownPagador">
                     <option value="null" >Quem pagou?</option>
-                    {pessoas.map( pessoa => (<option key={pessoa.id} value={pessoa.id} >{pessoa.nome}</option>))}
+                    {pessoasNaoExcluidos.map( pessoa => (<option key={pessoa.id} value={pessoa.id} >{pessoa.nome}</option>))}
                 </FormSelect>
                 <FormSelect  id="dropdownPago">
                     <option value="null" >Quem foi pago?</option>
-                    {pessoas.map( pessoa => (<option key={pessoa.id} value={pessoa.id} >{pessoa.nome}</option>))}
+                    {pessoasNaoExcluidos.map( pessoa => (<option key={pessoa.id} value={pessoa.id} >{pessoa.nome}</option>))}
                 </FormSelect>
 
                 <Button onClick={inserirPagamento}>Inserir</Button>
@@ -46,7 +49,7 @@ const PagamentosComponent = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {pagamentos.map(pagamento => (
+                    {pagamentosNaoExcluidos.map(pagamento => (
                         <tr key={pagamento.id} >
                             <td>{formatador.format(pagamento.valor)}</td>
                             <td>{pessoas[pagamento.paganteId].nome}</td>

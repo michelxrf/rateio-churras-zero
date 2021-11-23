@@ -14,13 +14,16 @@ const INITIAL_STATE = {
 function storeRedux(state = INITIAL_STATE, action){  
     switch(action.type){
         case 'ADD_PESSOA':
-            return { ...state, pessoas: [...state.pessoas, {id: state.pessoas.length, nome: action.nome}]}
+            return { ...state, pessoas: [...state.pessoas, {id: state.pessoas.length, nome: action.nome, excluido: false}]}
         
         case 'ADD_DESPESA':
-            return { ...state, despesas: [...state.despesas, {id: state.despesas.length, valor: action.valor, pessoaId: action.pessoaId}] }
+            return { ...state, despesas: [...state.despesas, {id: state.despesas.length, valor: action.valor, pessoaId: action.pessoaId, excluido: false}] }
         
+        case 'RM_DESPESA':
+            return { state }
+
         case 'ADD_PAGAMENTO':
-            return { ...state, pagamentos: [...state.pagamentos, {id: state.pagamentos.length, valor: action.valor, paganteId: action.paganteId, pagoId: action.pagoId}]}
+            return { ...state, pagamentos: [...state.pagamentos, {id: state.pagamentos.length, valor: action.valor, paganteId: action.paganteId, pagoId: action.pagoId, excluido: false}]}
 
         case 'ADD_TOTAIS':
             return { ...state, despesaPorPessoa: action.despesaPorPessoa, totais: action.novoTotal}

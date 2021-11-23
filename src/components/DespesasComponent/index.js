@@ -8,6 +8,13 @@ const DespesasComponent = () => {
     const pessoas = useSelector(state => state.pessoas)
     const dispatch = useDispatch()
 
+    const pessoasNaoExcluidos = pessoas.filter(({excluido}) => excluido === false)
+    const despesasNaoExcluidos = despesas.filter(({excluido}) => excluido === false)
+
+    function removerDespesa(id){
+        console.log("delete expense id: " + id)
+    }
+
     function inserirDespesa(){
         const novaDespesaValor = Number(document.getElementById("formDespesa").value)
         const novaDespesaNomeId = Number(document.getElementById("dropdownDespesa").value)
@@ -25,7 +32,7 @@ const DespesasComponent = () => {
                 <FormControl id="formDespesa" type="number" placeholder="Valor pago" min="0.01" step="0.01" ></FormControl>
                 <FormSelect id="dropdownDespesa">
                     <option value="null">Quem pagou?</option>
-                    {pessoas.map(pessoa => (<option key={pessoa.id} value={pessoa.id}>{pessoa.nome}</option>))}
+                    {pessoasNaoExcluidos.map(pessoa => (<option key={pessoa.id} value={pessoa.id}>{pessoa.nome}</option>))}
                 </FormSelect>
 
                 <Button variant="primary" onClick={inserirDespesa} >Inserir</Button>
@@ -38,11 +45,11 @@ const DespesasComponent = () => {
                     </tr>
                 </thead>
                 <tbody>
-                        {despesas.map(despesa => (
+                        {despesasNaoExcluidos.map(despesa => (
                             <tr key={despesa.id}>
                                 <td>{formatador.format(despesa.valor)}</td>
                                 <td>{pessoas[despesa.pessoaId].nome}</td>
-                                <td><BsTrash /></td>
+                                <td onClick={ () => {removerDespesa(despesa.id)}} ><BsTrash /></td>
                             </tr>
                         ))}
                 </tbody>
