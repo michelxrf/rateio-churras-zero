@@ -1,5 +1,7 @@
 import { FormControl, Button, Table, InputGroup, FormSelect } from "react-bootstrap"
 import { useSelector, useDispatch } from "react-redux"
+import { formatador } from "../../utils"
+import { BsTrash } from "react-icons/bs"
 
 const DespesasComponent = () => {
     const despesas = useSelector(state => state.despesas)
@@ -38,8 +40,9 @@ const DespesasComponent = () => {
                 <tbody>
                         {despesas.map(despesa => (
                             <tr key={despesa.id}>
-                                <td>{despesa.valor}</td>
+                                <td>{formatador.format(despesa.valor)}</td>
                                 <td>{pessoas[despesa.pessoaId].nome}</td>
+                                <td><BsTrash /></td>
                             </tr>
                         ))}
                 </tbody>

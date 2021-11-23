@@ -1,6 +1,7 @@
 import { useSelector, useDispatch } from "react-redux"
 import { Table, Alert } from "react-bootstrap"
 import { useEffect } from "react"
+import { formatador } from "../../utils"
 
 const TotaisComponent = () => {
     const pessoas = useSelector(state => state.pessoas)
@@ -59,7 +60,7 @@ const TotaisComponent = () => {
     return (
         <>
             <Alert variant='light'>
-                <h2>Despesa por pessoa: {despesaPorPessoa.toFixed(2)}</h2>
+                <h2>Despesa por pessoa: {formatador.format(despesaPorPessoa)}</h2>
             </Alert>
             <Table>
                 <thead>
@@ -74,9 +75,9 @@ const TotaisComponent = () => {
                     {totais.map(total => (
                         <tr key={total.id}>
                             <td>{pessoas[total.id].nome}</td>
-                            <td>{total.despesa.toFixed(2)}</td>
-                            <td>{total.deveReceber.toFixed(2)}</td>
-                            <td>{total.devePagar.toFixed(2)}</td>
+                            <td>{formatador.format(total.despesa)}</td>
+                            <td>{formatador.format(total.deveReceber)}</td>
+                            <td>{formatador.format(total.devePagar)}</td>
                         </tr>
                     ))}
                 </tbody>

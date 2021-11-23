@@ -1,5 +1,6 @@
 import { Table, Button, FormControl, InputGroup} from "react-bootstrap"
 import { useSelector, useDispatch } from 'react-redux'
+import { BsTrash } from 'react-icons/bs'
 
 const PessoasComponent = () => {
     const pessoas = useSelector(state => state.pessoas)
@@ -31,6 +32,7 @@ const PessoasComponent = () => {
                         {pessoas.map(pessoa => (
                             <tr key={pessoa.id}>
                                 <td>{pessoa.nome}</td>
+                                <td><BsTrash /></td>
                             </tr>
                         ))}
                 </tbody>

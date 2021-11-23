@@ -1,5 +1,7 @@
 import { useSelector, useDispatch} from 'react-redux'
 import { FormControl, Table, Button, FormSelect, InputGroup } from 'react-bootstrap'
+import { formatador } from '../../utils'
+import { BsTrash } from 'react-icons/bs'
 
 const PagamentosComponent = () => {
     const pessoas = useSelector(state => state.pessoas)
@@ -46,9 +48,10 @@ const PagamentosComponent = () => {
                 <tbody>
                     {pagamentos.map(pagamento => (
                         <tr key={pagamento.id} >
-                            <td>{pagamento.valor}</td>
+                            <td>{formatador.format(pagamento.valor)}</td>
                             <td>{pessoas[pagamento.paganteId].nome}</td>
                             <td>{pessoas[pagamento.pagoId].nome}</td>
+                            <td><BsTrash /></td>
                         </tr>
                     ))}
                 </tbody>
