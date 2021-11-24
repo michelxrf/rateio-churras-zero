@@ -4,10 +4,34 @@ import { BsTrash } from 'react-icons/bs'
 
 const PessoasComponent = () => {
     const pessoas = useSelector(state => state.pessoas)
+    const despesas = useSelector(state => state.despesas)
+    const pagamentos = useSelector(state => state.pagamentos)
     const dispatch = useDispatch()
 
+    function removerPessoa(id){
+        let novoPessoas = pessoas
+        let novoDespesas = despesas
+        let novoPagamentos = pagamentos
+
+        novoPessoas[id].excluido = true
+
+        novoDespesas.forEach((despesa) => {
+            if(id === despesa.pessoaId)
+                despesa.excluido = true
+        })
+
+        novoPagamentos.forEach((pagamento) => {
+            if(id === pagamento.pagoId)
+                pagamento.excluido = true
+            else if(id === pagamento.paganteId)
+                pagamento.excluido = true
+        })
+
+        dispatch({type:'RM_PESSOA', novoPessoas: novoPessoas, novoDespesas: novoDespesas, novoPagamentos: novoPagamentos})
+    }
+    
     function inserirPessoa(){
-        const novaPessoa = document.getElementById("formNome").value
+        let novaPessoa = document.getElementById("formNome").value
         
         document.getElementById("formNome").value = null
 
@@ -32,7 +56,7 @@ const PessoasComponent = () => {
                         {pessoas.map(pessoa => (
                             <tr key={pessoa.id}>
                                 <td>{pessoa.nome}</td>
-                                <td><BsTrash /></td>
+                                <td><BsTrash onClick={() => removerPessoa(pessoa.id)}/></td>
                             </tr>
                         ))}
                 </tbody>

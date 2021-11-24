@@ -11,6 +11,13 @@ const PagamentosComponent = () => {
     const pessoasNaoExcluidos = pessoas.filter(({excluido}) => excluido === false)
     const pagamentosNaoExcluidos = pagamentos.filter(({excluido}) => excluido === false)
 
+    function removerPagamento(id){
+        let novoState = pagamentos
+        novoState[id].excluido = true
+
+        dispatch({type: 'RM_PAGAMENTO', novoState: novoState})
+    }
+
     function inserirPagamento(){
         const novoPagamentoValor = Number(document.getElementById("formPagamento").value)
         const novoPagamentoPagante = Number(document.getElementById("dropdownPagador").value)
@@ -54,7 +61,7 @@ const PagamentosComponent = () => {
                             <td>{formatador.format(pagamento.valor)}</td>
                             <td>{pessoas[pagamento.paganteId].nome}</td>
                             <td>{pessoas[pagamento.pagoId].nome}</td>
-                            <td><BsTrash /></td>
+                            <td><BsTrash onClick={() => removerPagamento(pagamento.id)}/></td>
                         </tr>
                     ))}
                 </tbody>

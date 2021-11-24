@@ -12,7 +12,10 @@ const DespesasComponent = () => {
     const despesasNaoExcluidos = despesas.filter(({excluido}) => excluido === false)
 
     function removerDespesa(id){
-        console.log("delete expense id: " + id)
+        let novoState = despesas
+        novoState[id].excluido = true
+
+        dispatch({type:'RM_DESPESA', novoState: novoState})
     }
 
     function inserirDespesa(){
@@ -24,7 +27,7 @@ const DespesasComponent = () => {
 
         if((novaDespesaNomeId >= 0) && novaDespesaValor)
             dispatch({type: "ADD_DESPESA", valor: novaDespesaValor, pessoaId: novaDespesaNomeId})
-    }   
+    }
 
     return(
         <>

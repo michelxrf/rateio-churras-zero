@@ -54,7 +54,7 @@ const TotaisComponent = () => {
                 esteDeveReceber = 0
             }
 
-            novoTotais.push({ id: pessoa.id, nome: pessoas[pessoa.id].nome, despesa: despesaTotalDeste, deveReceber: esteDeveReceber, devePagar: esteDevePagar})
+            novoTotais.push({ id: novoTotais.length, pessoaId: pessoa.id, nome: pessoas[pessoa.id].nome, despesa: despesaTotalDeste, deveReceber: esteDeveReceber, devePagar: esteDevePagar})
         }
         dispatch({type:"ADD_TOTAIS", novoTotal: novoTotais, despesaPorPessoa: despesaTotalPorPessoa})
     }
@@ -79,7 +79,7 @@ const TotaisComponent = () => {
                 <tbody>
                     {totais.map(total => (
                         <tr key={total.id}>
-                            <td>{pessoasNaoExcluidos[total.id].nome}</td>
+                            <td>{pessoasNaoExcluidos[total.pessoaId].nome}</td>
                             <td>{formatador.format(total.despesa)}</td>
                             <td>{formatador.format(total.deveReceber)}</td>
                             <td>{formatador.format(total.devePagar)}</td>
