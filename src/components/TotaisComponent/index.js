@@ -79,7 +79,7 @@ const TotaisComponent = () => {
                 <tbody>
                     {totais.map(total => (
                         <tr key={total.id}>
-                            <td>{pessoasNaoExcluidos[total.pessoaId].nome}</td>
+                            <td>{pessoas[total.pessoaId].nome}</td>
                             <td>{formatador.format(total.despesa)}</td>
                             <td>{formatador.format(total.deveReceber)}</td>
                             <td>{formatador.format(total.devePagar)}</td>

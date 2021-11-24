@@ -8,6 +8,8 @@ const PessoasComponent = () => {
     const pagamentos = useSelector(state => state.pagamentos)
     const dispatch = useDispatch()
 
+    const pessoasNaoExcluidos = pessoas.filter(({excluido}) => excluido === false)
+
     function removerPessoa(id){
         let novoPessoas = pessoas
         let novoDespesas = despesas
@@ -27,7 +29,7 @@ const PessoasComponent = () => {
                 pagamento.excluido = true
         })
 
-        dispatch({type:'RM_PESSOA', novoPessoas: novoPessoas, novoDespesas: novoDespesas, novoPagamentos: novoPagamentos})
+        dispatch({type:'RM_PESSOA', novoPessoas: novoPessoas, novoPagamentos: novoPagamentos, novoDespesas: novoDespesas})
     }
     
     function inserirPessoa(){
@@ -53,7 +55,7 @@ const PessoasComponent = () => {
                     </tr>
                 </thead>
                 <tbody>
-                        {pessoas.map(pessoa => (
+                        {pessoasNaoExcluidos.map(pessoa => (
                             <tr key={pessoa.id}>
                                 <td>{pessoa.nome}</td>
                                 <td><BsTrash onClick={() => removerPessoa(pessoa.id)}/></td>
