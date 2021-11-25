@@ -5,7 +5,7 @@ O app facilita a divisão dos gastos do churrasco, ou qualquer evento, entre os 
 O meu objetivo com o projeto foi criar um projeto em ReactJS componetizado para o bootcamp da DIO/Take Blip. A ideia de rateio do churrasco foi do [Lucas Santos](https://github.com/LucasASantos/ls-rateio-churras) da Take Blip, que propôs o projeto em uma live do bootcamp. Muito obrigado por todo o apoio, Lucas!
 
 ## Requisitos
--- Node.Js
+-- Node.Js  
 -- npm
 
 ## Para rodar o app
