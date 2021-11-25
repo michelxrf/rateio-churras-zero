@@ -31,6 +31,7 @@ const DespesasComponent = () => {
 
     return(
         <>
+            <p>Cadastre as despesas que cada pessoa teve. Você pode cadastrar quantas despesas quiser.</p>
             <InputGroup>
                 <FormControl id="formDespesa" type="number" placeholder="Valor pago" min="0.01" step="0.01" ></FormControl>
                 <FormSelect id="dropdownDespesa">

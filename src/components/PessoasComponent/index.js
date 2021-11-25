@@ -43,6 +43,7 @@ const PessoasComponent = () => {
 
     return(
         <>
+            <p>Cadastre as pessoas que vão participar do churrasco.</p>
             <InputGroup>
                 <FormControl id="formNome" type="text" placeholder="Insira o nome" autoComplete='off' />
                 <Button variant="primary" onClick={inserirPessoa} >Inserir</Button>

@@ -33,6 +33,7 @@ const PagamentosComponent = () => {
 
     return(
         <>
+            <p>Cadastre os pagamentos que as pessoas fizeram entre si e eles serão usados para calcular o que cada um ainda precisa contribuir para a conta ficar bem dividida.</p>
             <InputGroup>
                 <FormControl id="formPagamento" type="number" placeholder="Valor" step="0.01" min="0.01" ></FormControl>
                 <FormSelect  id="dropdownPagador">

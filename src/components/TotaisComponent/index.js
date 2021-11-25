@@ -67,6 +67,7 @@ const TotaisComponent = () => {
             <Alert variant='light'>
                 <h2>Despesa por pessoa: {formatador.format(despesaPorPessoa)}</h2>
             </Alert>
+            <p>Aqui ficam os totais de despesas que cada pessoa teve com o churraso e também quanto cada um deve pagar para os outros para ficar tudo bem dividido.</p>
             <Table>
                 <thead>
                     <tr>
